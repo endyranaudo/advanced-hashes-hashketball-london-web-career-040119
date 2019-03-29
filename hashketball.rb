@@ -130,8 +130,8 @@ end
 
 
 def shoe_size(player_name)
-  game_hash.each do |team, player|
-    player[:players].each do |name, stats|
+  game_hash.each do |team, specs|
+    specs[:players].each do |name, stats|
       if name == player_name
         return stats[:shoe]
       end
@@ -159,8 +159,8 @@ end
 def player_numbers(name_of_team)
   team_jerseys = []
   game_hash.each do |team, specs|
-    if game_hash[team][:team_name] == name_of_team
-      game_hash[team][:players].each do |name, stats|
+    if specs[:team_name] == name_of_team
+      specs[:players].each do |name, stats|
         team_jerseys << stats[:number]
       end
     end
@@ -188,7 +188,6 @@ def big_shoe_rebounds
       if key == :players
         value.each do |player, stats|
           players_and_shoe_sizes[player] = stats[:shoe]
-          binding.pry
         end
       end
     end
@@ -217,7 +216,6 @@ def most_points_scored
     end
   end
   player_with_most_points = (players_and_points.sort_by {|player, points| points})[-1][0]
-  player_with_most_point
 end
 
 
